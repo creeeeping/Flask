@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}새 글 작성 | blog_practice{% endblock %}
+
+{% block content %}
+  <h1 class="text-2xl font-bold mb-4">새 글 작성</h1>
+
+  <form
+    method="POST"
+    action="{{ url_for('posts.new_post') }}"
+    class="bg-white rounded-lg shadow-sm border border-slate-200 p-6 space-y-4"
+  >
+    <div>
+      <label class="block mb-1 text-sm font-medium">제목</label>
+      <input
+        type="text"
+        name="title"
+        required
+        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+      />
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm font-medium">내용</label>
+      <textarea
+        name="content"
+        rows="6"
+        required
+        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+      ></textarea>
+    </div>
+
+    <div class="max-w-xs">
+      <label class="block mb-1 text-sm font-medium">별점 (선택, 1~5)</label>
+      <input
+        type="number"
+        name="rating"
+        min="1"
+        max="5"
+        class="w-24 border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white py-2.5 rounded text-sm font-medium hover:bg-blue-600"
+    >
+      저장
+    </button>
+  </form>
+{% endblock %}

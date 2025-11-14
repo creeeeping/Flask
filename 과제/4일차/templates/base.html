@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}블로그 연습{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-100 font-sans">
+    <div class="min-h-screen flex flex-col">
+
+      <header class="bg-white border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+          <a href="{{ url_for('posts.index') }}" class="flex items-center gap-2">
+            <span class="text-xl">📝</span>
+            <span class="font-bold">blog_practice</span>
+          </a>
+          <a
+            href="{{ url_for('posts.new_post') }}"
+            class="px-3 py-1.5 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+          >
+            새 글 작성
+          </a>
+        </div>
+      </header>
+
+      <main class="flex-1">
+        <div class="max-w-4xl mx-auto px-4 py-6">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class="mb-4 space-y-2">
+                {% for category, message in messages %}
+                  <div
+                    class="px-3 py-2 rounded text-sm
+                    {% if category == 'success' %}bg-emerald-100 text-emerald-700
+                    {% elif category == 'error' %}bg-rose-100 text-rose-700
+                    {% else %}bg-slate-100 text-slate-700{% endif %}"
+                  >
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+
+          {% block content %}{% endblock %}
+        </div>
+      </main>
+
+      <footer
+        class="py-5 text-center text-xs text-slate-400 border-t border-slate-200"
+      >
+        © blog_practice
+      </footer>
+    </div>
+  </body>
+</html>
